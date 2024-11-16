@@ -5,6 +5,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+// 引入reset.css
+import '@/assets/reset.css'
 
 const app = createApp(App)
 

@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <h1>這是組織介紹頁</h1>
+        <h1>這是GameHex前導頁</h1>
     </div>
 </template>
 
