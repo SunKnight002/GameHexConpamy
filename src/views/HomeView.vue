@@ -1,7 +1,10 @@
 <script>
-  import Header from '@/components/Header.vue';
-  import Card from '@/components/Card.vue';
-  import gsap from 'gsap';
+    import Header from '@/components/Header.vue';
+    import Card from '@/components/Card.vue';
+    // GSAP
+    import gsap from 'gsap';
+    import ScrollTrigger from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger); // 註冊 ScrollTrigger 插件
 
     // Import Swiper Vue.js components
     import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -14,10 +17,6 @@
       // import required modules
     import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-    import 'swiper/css';
-    import 'swiper/scss/navigation';
-    import 'swiper/scss/pagination';
-
     export default {
         components: {
             Swiper,
@@ -28,15 +27,81 @@
         setup() {
             const router = useRouter();
             const GameSlogan = ref(null);
+            const ServiceCard = ref(null);
+            const Title_Product = ref(null);
+            const Swiper_Product = ref(null);
             onMounted(() => {
-              gsap.fromTo(
+
+              // 這邊是產品區域的標題
+              gsap.fromTo
+              (
+                Title_Product.value,
+                {opacity:0, y:50},
+                { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' ,
+                  scrollTrigger:
+                  {
+                      trigger: Title_Product.value,
+                      start: 'top 80%',
+                      end: 'top 30%',
+                      scrub: false,
+                      once: true,
+                  }
+                }
+              )
+
+              const onSwiper = (swiper) => {
+              // 這邊是產品區域的輪播
+              gsap.fromTo
+              (
+                Swiper_Product.value,
+                {opacity:0, y:80},
+                { opacity: 1, y: 0, duration: 1.5, ease: 'power1.out' ,
+                  scrollTrigger:
+                  {
+                      trigger: Swiper_Product.value,
+                      start: 'top 80%',
+                      end: 'top 30%',
+                      scrub: false,
+                      once: true,
+                  }
+                }
+              )
+            }
+              // 這邊是產品區域的文字
+              gsap.fromTo
+              (
                 GameSlogan.value,
                 { opacity: 0, y: 50 }, // 開始狀態：透明度為 0，y 位移 50px
-                { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' } // 結束狀態：透明度 1，y 位移 0，動畫時間 1.5秒
-      );
+                { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' ,
+                  scrollTrigger:
+                  {
+                      trigger: GameSlogan.value,
+                      start: 'top 80%',
+                      end: 'top 30%',
+                      scrub: false,
+                      once: true,
+                  },
+                }
+              );
+
+              gsap.fromTo
+              (
+                ServiceCard.value,
+                {opacity:0,y:20},
+                {opacity:1,y:0,duration:0.8,ease:'power3.out',
+                scrollTrigger:
+                {
+                      trigger: ServiceCard.value,
+                      start: 'top 80%',
+                      end: 'top 30%',
+                      scrub: false,
+                      once: true,
+                }
+              }
+              )
     });
 
-            // 卡片
+            // 第二階層卡片
             const cards = [
               {
                   imgSrc: "/img/Card_HolyPoem.png",
@@ -59,17 +124,93 @@
                   imgSrc: "/img/Card_DragonHeart.png",
                   title: "DRAGON HEART",
                   platforms: [
+                  { imgSrc: "/img/Card_Info_ANDROIDICON.png", alt: "Android Icon" },
                       { imgSrc: "/img/Card_Info_PCICON.png", alt: "PC Icon" },
                   ],
-              },              {
+              },
+              {
                   imgSrc: "/img/Card_8inKey.png",
-                  title: "8 IN KEY",
+                  title: "8 DAYS IN KEY",
                   platforms: [
                       { imgSrc: "/img/Card_Info_IOSICON.png", alt: "iOS Icon" },
                       { imgSrc: "/img/Card_Info_ANDROIDICON.png", alt: "Android Icon" },
+                      { imgSrc: "/img/Card_Info_PCICON.png", alt: "PC Icon" },
+                  ],
+              },
+              {
+                  imgSrc: "/img/Card_HellKnight.png",
+                  title: "HELL KNIGHT",
+                  platforms: [
+                      { imgSrc: "/img/Card_Info_IOSICON.png", alt: "iOS Icon" },
+                      { imgSrc: "/img/Card_Info_ANDROIDICON.png", alt: "Android Icon" },
+                      { imgSrc: "/img/Card_Info_PCICON.png", alt: "PC Icon" },
+                  ],
+              },
+              {
+                  imgSrc: "/img/Card_FATENORTH.png",
+                  title: "FATE：NORTH",
+                  platforms: [
+                      { imgSrc: "/img/Card_Info_IOSICON.png", alt: "iOS Icon" },
+                      { imgSrc: "/img/Card_Info_ANDROIDICON.png", alt: "Android Icon" },
+                      { imgSrc: "/img/Card_Info_PCICON.png", alt: "PC Icon" },
                   ],
               },
           ];
+
+          const hoverIndex = ref(null); // 用來追蹤滑鼠 hover 的卡片索引
+          // 第三階層服務項目
+          const services =
+          [
+                  {
+                      titleImg: new URL("@/assets/img/Icon_Business_Game_Y.png", import.meta.url).href,
+                      hoverImg: new URL("@/assets/img/Icon_Business_Game_B.png", import.meta.url).href,
+                      titleText: "遊戲軟體研發",
+                      text: [
+                          "我們擁有超過十年的專業遊戲研發經驗，擁有精英企劃、美術、程式團隊，成功上架了20款雙平台遊戲。",
+                          "此外，我們提供多語系在地化服務，助您在國內外市場順利推廣產品。"
+                      ]
+                  },
+                  {
+                      titleImg: new URL("@/assets/img/Icon_Business_Design_Y.png", import.meta.url).href,
+                      hoverImg: new URL("@/assets/img/Icon_Business_Design_B.png", import.meta.url).href,
+                      titleText: "視覺設計",
+                      text: [
+                          "我們擁有專業的視覺設計團隊，為您提供優質視覺設計服務。",
+                          "由專業PM協助您與美術人員進行高效溝通，確保您的設計需求得到完美實現。"
+                      ]
+                  },
+                  {
+                      titleImg: new URL("@/assets/img/Icon_Business_Web_Y.png", import.meta.url).href,
+                      hoverImg: new URL("@/assets/img/Icon_Business_Web_B.png", import.meta.url).href,
+                      titleText: "網站平台開發",
+                      text: [
+                          "我們提供專業的網站平台開發服務，根據您的需求由UI/UX美術繪製設計稿，再由專業的前端和後端工程師進行開發。",
+                          "也能根據您的需求建置客製化後台系統，確保您的網站功能齊全且操作便捷。"
+                      ]
+                  },
+                  {
+                      titleImg: new URL("@/assets/img/Icon_Business_System_Y.png", import.meta.url).href,
+                      hoverImg: new URL("@/assets/img/Icon_Business_System_B.png", import.meta.url).href,
+                      titleText: "系統建置維護",
+                      text: [
+                          "我們提供專業系統建置與維護服務，涵蓋伺服器部署、網絡配置、數據庫管理及日常運維。",
+                          "確保系統穩定運行，並通過定期升級與更新保持最新的安全性和功能。"
+                      ]
+                  }
+              ];
+
+              // 預備加載處理
+              const preloadImages = () => {
+              const images = ['@/assets/img/BG_Business_Card.png', '@/assets/img/BG_Business_Card_hover.png'];
+              images.forEach((src) => {
+                  const img = new Image();
+                  img.src = src;
+              });
+              };
+
+              onMounted(() => {
+              preloadImages();
+              });
 
             const initSwiper = () => {
             // 您可以使用 Swiper 的 API 在這裡初始化或更新 Swiper
@@ -79,7 +220,6 @@
             };
 
             const onSwiper = (swiper) => {
-                console.log(swiper);
 
                             // 將自定義按鈕綁定到 Swiper 的 API
             const nextButton = document.querySelector('.swiper-button-next-custom');
@@ -88,24 +228,30 @@
             if (nextButton && prevButton) {
                 nextButton.addEventListener('click', () => swiper.slideNext());
                 prevButton.addEventListener('click', () => swiper.slidePrev());
-            }
+              }
             };
             const onSlideChange = () => {
                 console.log('slide change');
             };
 
+            const handleRouteChange = () => {
+                initSwiper();
+            };
+
+
             onMounted(() => {
-                router.afterEach(() => {
+              const unwatch = router.afterEach(() => {
                     initSwiper();
                 });
+
+                router.afterEach(handleRouteChange);
             });
 
             onBeforeUnmount(() => {
-                // 清理事件監聽器
-                router.afterEach(() => {});
+                unwatch(); // 移除監聽器
             });
 
-            return { cards,onSwiper, onSlideChange, Navigation, Pagination, Autoplay,GameSlogan };
+            return { cards,services,hoverIndex,onSwiper, onSlideChange, Navigation, Pagination, Autoplay,GameSlogan,ServiceCard,Title_Product,Swiper_Product };
         }
     }
 </script>
@@ -140,10 +286,14 @@
         </section>
 
         <!-- 首頁第二層歷年產品圖卡 -->
-        <section class="GameHex_Index_Card">
-          <h1>Product</h1>
-          <img src="/img/Span_Light.png" alt="發光橘色條">
+        <section class="GameHex_Index_Card" id="product">
+          <div ref="Title_Product" class="Title_Card">
+            <h1>Product</h1>
+            <img  src="/img/Span_Light.png" alt="發光橘色條">
+          </div>
+
           <Swiper
+              ref="Swiper_Product"
               class="mySwiperCard"
               :modules="[Navigation, Pagination, Autoplay]"
               :navigation="true"
@@ -160,10 +310,32 @@
         </section>
 
         <!-- 首頁第三層公司提供服務 -->
-        <section class="GameHex_Index_Services">
+        <section class="GameHex_Index_Services" id="services">
           <div class="Page_Title">
             <p>Product</p>
             <img src="/img/Span_Light.png" alt="發光橘色條">
+          </div>
+
+          <div class="Services_Area">
+            <div
+              class="Service_Card"
+              v-for="(service, index) in services"
+              :key="index"
+              @mouseover="hoverIndex = index"
+              @mouseleave="hoverIndex = null"
+              ref="ServiceCard"
+            >
+              <div class="Service_Title">
+                <img :src="hoverIndex === index ?  service.hoverImg : service.titleImg" :alt="service.titleText">
+                <p :class="{ hovered: hoverIndex === index }">{{ service.titleText }}</p>
+              </div>
+              <div class="Service_Text">
+                <p v-for="(paragraph, idx) in service.text"
+                :key="idx"
+                :class="{ hovered: hoverIndex === index }"
+                >{{ paragraph }}</p>
+              </div>
+            </div>
           </div>
 
 
@@ -285,11 +457,7 @@ $color_2: var(--swiper-theme-color);
   font-style: normal;
   color: #fff;
 
-  h1{
-    font-size: 32px;
-    margin: 0 auto;
-    text-align: center;
-  }
+
 
   p{
     font-size: 40px;
@@ -298,6 +466,19 @@ $color_2: var(--swiper-theme-color);
     margin-top: 36px;
     opacity: 0;
     transform: translateY(50px);
+  }
+}
+
+.Title_Card{
+  font-family: "Odibee Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #fff;
+
+  h1{
+    font-size: 40px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   img{
@@ -359,6 +540,7 @@ $color_2: var(--swiper-theme-color);
 
 .swiper-pagination-bullet-active {
   opacity: 1;
+  transform: scale(1.2); // 添加微小放大效果
 }
 
 //公司提供服務GameHex_Index_Services
@@ -379,9 +561,85 @@ $color_2: var(--swiper-theme-color);
   color: #fff;
   margin-left: 40px;
   margin-top: 140px;
+  margin-bottom: 24px;
 
   p{
     font-size: 40px;
+  }
+}
+
+.Services_Area{
+  width: 80%;
+  height: 80vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(2,1fr);
+  gap: 34.58px;
+  align-items: center;
+  justify-items: center;
+}
+
+.Service_Card{
+  width: 545px;
+  height: 372px;
+  background-image: url('@/assets/img/BG_Business_Card.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &:hover{
+    background-image: url('@/assets/img/BG_Business_Card_hover.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #000;
+    }
+}
+
+.Service_Title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  color: #fff;
+  margin-top: 47px;
+  margin-bottom: 24px;
+
+  p{
+    color: #fff;
+    font-size: 32px;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+
+    &:hover{
+      color: #000;
+    }
+  }
+}
+
+.Service_Text{
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #fff;
+
+  &:hover{
+      color: #000;
+  }
+
+  p{
+    width: 80%;
+    margin-top: 24px;
+    font-size: 24px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    line-height: 35px;
+    transition: color 0.3s ease;
+
+    &:hover{
+      color: #000;
+    }
   }
 }
 

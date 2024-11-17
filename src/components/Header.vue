@@ -5,15 +5,33 @@
             <ul class="topbarUL">
                 <router-link to="#services" class="nav-link"><li class="nav-item"><span>Services</span></li></router-link>
                 <router-link to="#product" class="nav-link"><li class="nav-item"><span>Product</span></li></router-link>
-                <router-link to="/about" class="nav-link"><li class="nav-item"><span>Organization</span></li></router-link>
-                <router-link to="/recruitment" class="nav-link"><li class="nav-item"><span>Recruitment</span></li></router-link>
-                <router-link to="/recruitment" class="nav-link"><li class="nav-item"><span>Contact</span></li></router-link>
+                <router-link to="/about" class="nav-link"><li class="nav-item" @click="commingsoon"><span>Organization</span></li></router-link>
+                <router-link to="/recruitment" class="nav-link"><li class="nav-item" @click="commingsoon"><span>Recruitment</span></li></router-link>
+                <router-link to="/recruitment" class="nav-link"><li class="nav-item" @click="commingsoon"><span>Contact</span></li></router-link>
             </ul>
         </nav>
     </header>
 </template>
 
 <script>
+
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/dist/sweetalert2.css';
+
+export default {
+        methods: {
+            commingsoon(){
+                console.log(Swal); // 應顯示 `fire` 函數
+                Swal.fire({
+                title: '頁面製作中',
+                text: '您好，相關頁面規劃中',
+                icon: 'info',
+                confirmButtonColor: '#FCD15B',
+                confirmButtonText: 'OK'
+                });
+            }
+        }
+    }
 
 </script>
 

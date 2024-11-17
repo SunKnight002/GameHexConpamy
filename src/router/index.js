@@ -33,9 +33,12 @@ const router = createRouter({
     routes,
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
-            return {selector: to.hash};
+            return {
+                el: to.hash, // 確保 Vue Router 對應的選擇器生效
+                behavior: 'smooth' // 平滑滾動效果
+            };
         }
-        return {x: 0, y: 0};
+        return { x: 0, y: 0 }; // 預設滾動到頂部
     }
 })
 
