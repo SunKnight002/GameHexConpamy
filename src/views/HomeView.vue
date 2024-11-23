@@ -312,7 +312,7 @@
         <!-- 首頁第三層公司提供服務 -->
         <section class="GameHex_Index_Services" id="services">
           <div class="Page_Title">
-            <p>Product</p>
+            <p>Services</p>
             <img src="/img/Span_Light.png" alt="發光橘色條">
           </div>
 
@@ -337,8 +337,52 @@
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- 首頁第四區塊 服務項目 額外內容 -->
+        <section class="GameHex_Index_Services_extra">
+          <!-- 左邊區域 -->
+          <div class="Services_left">
+            <img src="@/assets/img/Service_LightingWorld.jpg" alt="">
+          </div>
+          <!-- 中間區域 -->
+          <div class="Services_mid">
+            <section class="Services_mid_type1">
+              <section class="Services_mid_t1_Word">
+                <p>模組化開發</p>
+                <p>透過專業團隊實現您的夢想</p>
+                <p class="t1_Word_text">專業企劃/美術/程式團隊實現您的委託，讓您的創意點子進入我們模組化的開發模式，並且時刻同步最新進度!</p>
+              </section>
+              <section class="Services_mid_t1_img">
+                <img src="@/assets/img/Service_Money.jpg" alt="">
+              </section>
+            </section>
 
 
+            <section class="Services_mid_type2">
+              <section class="Services_mid_t1_Word">
+                <p>最正確的在地翻譯</p>
+                <p>多國語系在地化翻譯</p>
+                <p class="t1_Word_text">您打算進軍國外市場?沒問題!我們有具備日文與韓文證照的企劃人員協助翻譯!!</p>
+              </section>
+              <section class="Services_mid_t2_img">
+                <img src="@/assets/img/Service_Language.jpg" alt="">
+              </section>
+            </section>
+
+            <section class="Services_mid_type1">
+              <section class="Services_mid_t1_Word">
+                <p>多國行銷</p>
+                <p>海量精準投放廣告</p>
+                <p class="t1_Word_text">透過大量的廣告投放讓您的遊戲進入各國玩家的視野，並且結合在地線下活動打響遊戲之知名度!</p>
+              </section>
+              <section class="Services_mid_t1_img">
+                <img src="@/assets/img/Service_Intel.jpg" alt="">
+              </section>
+            </section>
+          </div>
+          <!-- 右邊區域 -->
+          <div class="Services_right"></div>
         </section>
     </main>
 </template>
@@ -429,7 +473,7 @@ $color_2: var(--swiper-theme-color);
     background-size: cover;
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
     z-index: 10;
     cursor: pointer;
@@ -441,7 +485,7 @@ $color_2: var(--swiper-theme-color);
     background-size: cover;
     position: absolute;
     left: 10px;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
     opacity: 0.5;
     z-index: 10;
@@ -548,7 +592,7 @@ $color_2: var(--swiper-theme-color);
 .GameHex_Index_Services{
   width: 100%;
   height: 100vh;
-  padding: 80px 0 80px 0;
+  padding: 140px 0 80px 0;
   background-image: url('@/assets/img/BG_Index_Bussiness.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -560,7 +604,6 @@ $color_2: var(--swiper-theme-color);
   font-style: normal;
   color: #fff;
   margin-left: 40px;
-  margin-top: 140px;
   margin-bottom: 24px;
 
   p{
@@ -569,7 +612,7 @@ $color_2: var(--swiper-theme-color);
 }
 
 .Services_Area{
-  width: 80%;
+  width: 60%;
   height: 80vh;
   margin: 0 auto;
   display: grid;
@@ -641,6 +684,97 @@ $color_2: var(--swiper-theme-color);
       color: #000;
     }
   }
+}
+
+// GameHex_Index_Services_extra
+.GameHex_Index_Services_extra{
+  width: 100%;
+  padding: 120px 120px 40px 120px ;
+  background-color: #00202B;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Services_left{
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.Services_mid{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 33.33%;
+}
+
+.Services_mid_type1{
+  display: flex;
+  justify-content: center;
+  border: 1px solid gold;
+  width: 100%;
+}
+
+.Services_mid_type2{
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  border: 1px solid gold;
+  width: 100%;
+}
+
+.Services_mid_t1_Word {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p:nth-child(1) {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  p:nth-child(2) {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .t1_Word_text {
+    font-size: 16px;
+    line-height: 30px;
+    width: 100%;
+  }
+}
+
+
+.Services_mid_t1_img{
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 8px 0px 8px 24px;
+}
+
+.Services_mid_t2_img{
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 8px 24px 8px 8px;
+}
+
+
+.Services_right {
+  width: 16.9%;
+  height: 774px;
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 68, 45, 1) 0%,
+    rgba(169, 89, 31, 1) 50%,
+    rgba(255, 211, 65, 0.2) 100%
+  );
 }
 
 </style>
